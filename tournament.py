@@ -34,11 +34,11 @@ def countPlayers():
 
     db = connect()
     c = db.cursor()
-    c.execute("SELECT * FROM players;")
-    player_count = c.rowcount
+    c.execute("SELECT count(*) as num FROM players;")
+    player_count = c.fetchone()
     db.close()
     
-    return player_count
+    return player_count[0]
 
 def registerPlayer(name):
     """Adds a player to the tournament database.
@@ -46,7 +46,7 @@ def registerPlayer(name):
     Args:
       name: the player's full name (need not be unique).
     """
-    cmd = "INSERT INTO players (name) VALUES (%s)"
+    cmd = "INSERT INTO players (name) VALUES (%s);"
     db = connect()
     c = db.cursor()
     c.execute(cmd, (name,))
@@ -66,6 +66,15 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
+    
+    cmd = "SELECT * FROM player_standings;"
+    db = connect()
+    c = db.cursor()
+    c.execute(cmd)
+    player_standings = c.fetchall()
+    db.close()
+    
+    return player_standings
 
 
 def reportMatch(winner, loser):
@@ -76,6 +85,12 @@ def reportMatch(winner, loser):
       loser:  the id number of the player who lost
     """
  
+    cmd = "INSERT INTO matches(winner, loser) VALUES(%s, %s)"
+    db = connect()
+    c = db.cursor()
+    c.execute(cmd, (winner, loser))
+    db.commit()
+    db.close()
  
 def swissPairings():
     """Returns a list of pairs of players for the next round of a match.
@@ -93,4 +108,44 @@ def swissPairings():
         name2: the second player's name
     """
 
+    cmd = "SELECT id, name FROM player_standings;"
+    db = connect()
+    c = db.cursor()
+    c.execute(cmd)
+    rows = c.fetchall()
+    db.close()
 
+    standings = []
+    total_rows = len(rows)
+    count = 0
+    while count < total_rows:
+      standings.append(
+        (
+          rows[count][0], 
+          rows[count][1], 
+          rows[count+1][0], 
+          rows[count+1][1]
+        )
+      )
+      count += 2
+    
+    return standings
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
