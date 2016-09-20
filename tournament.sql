@@ -1,5 +1,6 @@
 -- Table and View definitions for the tournament project.
 
+CREATE DATABASE tournament;
 \c tournament
 -- Order is very important here, because of dependencies.
 -- If the order is wrong and you will get an error.
@@ -8,7 +9,6 @@ DROP VIEW IF EXISTS matches_by_player;
 DROP VIEW IF EXISTS wins_by_player;
 DROP TABLE IF EXISTS matches;
 DROP TABLE IF EXISTS players;
-
 
 CREATE TABLE players (
   id SERIAL PRIMARY KEY,
