@@ -10,7 +10,7 @@ This project was created and submitted to Udacity as part of the Full Stack Deve
 
 ## Running the Application
 1. You must first have a PostgreSQL database installed and running locally. You can find more info [here](https://wiki.postgresql.org/wiki/Detailed_installation_guides)
-2. You will also need python and psycopg2 installed.
+2. You will also need [python](https://www.python.org/downloads/) and [psycopg2](http://initd.org/psycopg/) installed.
 2. Clone this repo `git clone https://github.com/johnlaine1/udacity-fsnd-tournament.git`
 3. cd into the directory `cd udacity-fsnd-tournament'
 4. Start the psql terminal by typing `psql`
