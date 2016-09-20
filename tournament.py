@@ -135,22 +135,3 @@ def swissPairings():
     
     
     return standings
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
